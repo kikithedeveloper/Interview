@@ -95,7 +95,7 @@ def replace_spaces (string):
 
 	return newString
 
-print replace_spaces("Kim love Chi   ")
+# print replace_spaces("Kim love Chi  ")
 
 
 #__________________________________________
@@ -109,8 +109,28 @@ print replace_spaces("Kim love Chi   ")
 # string. You can assume the string has only upper and 
 # lower case letters (a - z).
 
+def compress (string):
 
+	compressedStr = ""
 
+	count = 1
+
+	for i in range(len(string)):
+
+		if i == len(string)-1:
+			newStr = string[i] + str(count)
+			compressedStr += newStr
+
+		else:
+
+			if string[i] != string[i+1]:
+				newStr = string[i] + str(count)
+				compressedStr += newStr
+				count += 1
+
+	return compressedStr
+
+print compress("aabccccczzzzzaaaaa")
 
 #__________________________________________
 
