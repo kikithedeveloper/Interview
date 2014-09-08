@@ -437,7 +437,7 @@ class BinaryTree():
 
 		if self.root is None:
 			self.root = Node(data)
-			print self.root.data
+			# print self.root.data
 
 		else:
 
@@ -451,7 +451,7 @@ class BinaryTree():
 						n = n.left
 					else:
 						n.left = Node(data)
-						print n.left.data
+						# print n.left.data
 						done = True
 				elif data > n.data:
 					if n.right:
@@ -459,32 +459,10 @@ class BinaryTree():
 						n = n.right
 					else:
 						n.right = Node(data)
-						print n.right.data
+						# print n.right.data
 						done = True
 				else:
 					print "Data already exists."
-
-
-
-		# if self.root is None:
-		# 	self.root = Node(data)
-		# else:
-	# 		root = self.root
-
-	# 	if root.data > data:
-	# 		if root.left is None:
-	# 			root.left = Node(data)
-	# 		else:
-	# 			root.left.insert(data)
-
-	# 	if root.data < data:
-	# 		if root.right is None:
-	# 			root.right = Node(data)
-	# 		else:
-	# 			root.right.insert(data)
-
-	# 	if root.data == data:
-	# 		print "data already exist"
 
 	def getLeft(self):
 
@@ -518,57 +496,33 @@ class BinaryTree():
 
 	# Print the value of every node you find with DFS and BFS.
 
-	# In-Order Traversal
-	def dfs(self):
+	# Pre-Order Traversal
+	def preorder(self, node):
 
-		if self.root is None:
-			return None
-		else: 
-			node = self.root
-
-		print node.data
-
-		if node:
-			dfs(node.left)
-			print node.data
-			dfs(node.right)
-
-
-			
-
-		# if node:
-		# 	dfs(node.left)
-		# 	print node.data
-		# 	dfs(node.right)
-
-		# if node:
-		# 	dfs(node.left)
-		# 	print node.data
-		# 	dfs(node.right)
-
-
-# def inorder(t):
-#     if t.left:
-#         for elem in inorder(t.left):
-#             print elem
-#     print t
-#     if t.right:
-#         for elem in inorder(t.right):
-#             print elem
-
-
-	def in_order_list(self, r = []):
-		hasLeft = self.left is not None
-		hasRight = self.right is not None
-		if self is None:
+		if node == None:
 			return
 		else:
-			if hasLeft:
-				self.left.in_order_list(r)
-			r.append(self.value)
-			if hasRight:
-				self.right.in_order_list(r)
-		return r
+			print node.data
+			self.preorder(node.left)
+			self.preorder(node.right)
+
+	# In-Order Traversal
+	def inorder(self, node):
+		if (node == None):
+			return
+		else:
+			self.inorder(node.left)
+			print(node.data)
+			self.inorder(node.right)		
+
+	# Post-Order Traversal
+	def postorder(self,node):
+		if node == None:
+			return 
+		else:
+			self.postorder(node.left)
+			self.postorder(node.right)
+			print node.data
 
 
 # tree = BinaryTree()
@@ -589,7 +543,13 @@ class BinaryTree():
 
 # print tree.getRight()
 
-# tree.dfs()
+# tree.dfs(tree.root)
+
+# tree.inorder(tree.root)
+
+# tree.preorder(tree.root)
+
+# tree.postorder(tree.root)
 
 # dfs(tree)
 
@@ -806,6 +766,25 @@ def count_up(target, n):
 
 #__________________________________________
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #__________________________________________
 #__________________________________________
 
@@ -1003,3 +982,50 @@ def count_up(target, n):
 #__________________________________________
 
 #__________________________________________
+
+def findTop10ID (filetext):
+
+	filename = open(filetext, 'r') # open and read the file
+
+	fileStrip = filename.read().splitlines() # removes the \n
+
+	idDict = {} # declare an empty dict
+ 
+	for i in fileStrip: # count to idDict
+		if i in idDict:
+			idDict[i] += 1
+		else:
+			idDict[i] = 1
+
+	print idDict
+
+	val = 0 # declare an empty val
+
+	for i in idDict.values(): # finds the highest value
+		if i > val:
+			val = i
+
+	topTen = False # declare a boolean value
+
+	is10 = 0 # decare an empty counter
+
+	idList = [] # declare an empty list
+
+	while not topTen: # while loop
+
+		for k, v in idDict.iteritems():
+
+			if v >= val: 
+				is10 += 1  # count to is10
+				idList.append(k) # add to idList
+
+				if is10 == 10: # if is10 reaches 10, then execute the block				
+					print "The top ten IDs are: " + str(idList)
+					topTen = True # return opposite boolean value to stop while loop
+
+		# if it reaches here, then it means it doesn't have 10 ids.
+		is10 = 0 # reset
+		idList = [] # reset
+		val -= 1 # subtract val by 1 to cover more ids.
+
+# findTop10ID("ids.txt")
