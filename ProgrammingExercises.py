@@ -40,7 +40,7 @@ def reverse(word):
 
 	return reverse
 
-#print reverse("ChiMing") # returns "ginMihC".
+# print reverse("ChiMing") ## returns "ginMihC".
 
 #__________________________________________
 
@@ -72,6 +72,33 @@ def same_permutation(a, b):
 
 # print same_permutation([1,2,3],[2,3,1,1])
 # returns False
+
+#__________________________________________
+
+# Write a recursive function for generating all permutations 
+# of an input string. Return them as an array.
+
+def get_permutations(string):
+	# base case
+	if len(string) <= 1:
+		return [string]
+
+	all_chars_except_last = string[:-1]
+	last_char = string[-1]
+	
+	# recursive call: get all possible permutations for all chars except last
+	permutations_of_all_chars_except_last = get_permutations(all_chars_except_last)
+	
+	# put the last char in all possible positions for each of the above permutations
+	possible_positions_to_put_last_char = range(len(all_chars_except_last)+1)
+	permutations = []
+	for permutation_of_all_chars_except_last in permutations_of_all_chars_except_last:
+		for position in possible_positions_to_put_last_char:
+			permutation = permutation_of_all_chars_except_last[:position] + last_char + permutation_of_all_chars_except_last[position:]
+			permutations.append(permutation)
+	return permutations
+
+# print get_permutations("Hello")
 
 #__________________________________________
 
@@ -357,18 +384,42 @@ class LinkedList(object):
 				newList.next = node
 				print node.data
 
+	# def reverse(self):
+	# 	current = self.head
+	# 	previous = None
+	# 	next = None
+
+	# 	# until we have 'fallen off' the end of the list
+	# 	while (current is not None):
+
+	# 		# copy a pointer to the next element 
+	# 		# before we overwrite current.next
+	# 		next = current.next
+
+	# 		# reverse the 'next' pointer
+	# 		current.next = previous
+
+	# 		# step forward in the list
+	# 		previous = current
+	# 		current = next
+
+	# 	return previous
 
 # l = LinkedList()
 
-# l.append(5)
+# l.append(1)
 
-# l.append(10)
+# l.append(2)
 
 # l.append(3)
 
-# l.append(200)
+# l.append(4)
 
-# l.append("hello")
+# l.append(5)
+
+# # l.reverse()
+
+# l.traverse()
 
 # l.append(3)
 
@@ -407,6 +458,9 @@ class LinkedList(object):
 # l.partition(79)
 
 # l.traverse()
+
+
+
 
 #__________________________________________
 
@@ -494,8 +548,6 @@ class BinaryTree():
 
 				root = root.right
 
-	# Print the value of every node you find with DFS and BFS.
-
 	# Pre-Order Traversal
 	def preorder(self, node):
 
@@ -524,20 +576,76 @@ class BinaryTree():
 			self.postorder(node.right)
 			print node.data
 
+	def dfsWhile(self,target):
 
-# tree = BinaryTree()
+		n = self.root
 
-# tree.insert(5)
+		while n:
 
-# tree.insert(4)
+			if n.data == target:
+				found = True
+				return True
 
-# tree.insert(6)
+			if n.data > target:
+				n = n.left
 
-# tree.insert(7)
+			if n.data < target:
+				n = n.right
 
-# tree.insert(2)
+		return False
 
-# tree.insert(1)
+	def bfs(self, target):
+
+		q = []
+
+		q.append(self.root)
+
+		while q:
+
+			n = q.pop()
+
+			if n.data == target:
+				return True
+
+			if n.left:
+				q.append(n.left)
+
+			if n.right:
+				q.append(n.right)
+
+		return False
+
+	# I don't know how to work this... :-( Get help.
+	# def dfsRecursive(self, node, target):
+
+	# 	n = node
+
+	# 	if n is None:
+	# 		return None
+
+	# 	if n.data == target:
+	# 		return True
+
+	# 	if n.data > target:
+	# 		return self.dfsRecursive(n.left, target)
+
+	# 	else:
+	# 		return self.dfsRecursive(n.right, target)
+
+
+tree = BinaryTree()
+
+tree.insert(5)
+
+tree.insert(4)
+
+tree.insert(6)
+
+tree.insert(7)
+
+tree.insert(2)
+
+tree.insert(1)
 
 # print tree.getLeft()
 
@@ -554,6 +662,12 @@ class BinaryTree():
 # dfs(tree)
 
 # tree.in_order_list()
+
+# print tree.bfs(7)
+
+# print tree.dfsWhile(4)
+
+
 
 
 #__________________________________________
@@ -602,7 +716,7 @@ def factorial(n):
 	else:
 		return n * factorial(n-1)
 
-# print factorial(5)
+# print factorial(3)
 
 #__________________________________________
 
@@ -756,13 +870,199 @@ def count_up(target, n):
 
 #__________________________________________
 
-#__________________________________________
+# Python Lambda Functions
+
+def increment (n): 
+	return lambda x: x + n
+
+f = increment(2)
+g = increment(6)
+
+# print f(42), g(42)
+# print increment (22) (33)
 
 #__________________________________________
 
-#__________________________________________
+foo = [2, 18, 9, 22, 17, 24, 8, 12, 27]
+# print filter(lambda x: x % 3 == 0, foo)
+# print map(lambda x: x * 2 + 10, foo) 
+# print reduce(lambda x, y: x + y, foo)
 
 #__________________________________________
+
+nums = range(2,50)
+for i in range(2,8):
+	nums = filter(lambda x: x==i or x % i, nums)
+# print nums
+
+#__________________________________________
+
+sentence = "It is raining cats and dogs"
+words = sentence.split()
+# print words
+
+# return the length of each word
+length = map(lambda word: len(word), words)
+# print length
+
+#__________________________________________
+
+# same thing, but in one line
+# print map(lambda w: len(w), "it is raining cats and dogs".split())
+
+student_tuples = [
+	('ChiMing', 'F', 28), # how sad...!
+	('Kimberly', 'F', 24), # in the same boat TT_TT
+	('john', 'A', 15),
+	('jane', 'B', 12),
+	('dave', 'B', 10),
+]
+
+age = sorted(student_tuples, key=lambda student: student[2]) #sort by age
+
+# print age
+
+#__________________________________________
+
+# SORTING ALGORITHMS
+
+# MergeSort
+
+def merge(left, right):
+	result = []
+	i ,j = 0, 0
+	while i < len(left) and j < len(right):
+		if left[i] <= right[j]:
+			result.append(left[i])
+			i += 1
+		else:
+			result.append(right[j])
+			j += 1
+	result += left[i:]
+	result += right[j:]
+	return result
+
+def mergesort(list):
+	if len(list) < 2:
+		return list
+	middle = len(list) / 2
+	left = mergesort(list[:middle])
+	right = mergesort(list[middle:])
+	return merge(left, right)
+
+# print mergesort([6,3,1,2,4,5,7,0])
+
+# def merge(left, right):
+#     result = []
+#     i ,j = 0, 0
+#     while i < len(left) and j < len(right):
+#         print('left[i]: {} right[j]: {}'.format(left[i],right[j]))
+#         if left[i] <= right[j]:
+#             print('Appending {} to the result'.format(left[i]))           
+#             result.append(left[i])
+#             print('result now is {}'.format(result))
+#             i += 1
+#             print('i now is {}'.format(i))
+#         else:
+#             print('Appending {} to the result'.format(right[j]))
+#             result.append(right[j])
+#             print('result now is {}'.format(result))
+#             j += 1
+#             print('j now is {}'.format(j))
+#     print('One of the list is exhausted. Adding the rest of one of the lists.')
+#     result += left[i:]
+#     result += right[j:]
+#     print('result now is {}'.format(result))
+#     return result
+
+# def mergesort(L):
+#     print('---')
+#     print('mergesort on {}'.format(L))
+#     if len(L) < 2:
+#         print('length is 1: returning the list withouth changing')
+#         return L
+#     middle = len(L) / 2
+#     print('calling mergesort on left {}'.format(L[:middle]))
+#     left = mergesort(L[:middle])
+#     print('calling mergesort on right {}'.format(L[middle:]))
+#     right = mergesort(L[middle:])
+#     print('Merging left: {} and right: {}'.format(left,right))
+#     out = merge(left, right)
+#     print('exiting mergesort on {}'.format(L))
+#     print('#---')
+#     return out
+
+
+# mergesort([6,2,4,3,5,1])
+
+#__________________________________________
+
+# Bubble Sort
+
+def bubblesort(list):
+
+	for j in range(len(list)-1,0,-1):
+		for i in range(j):
+			# print list[i], list[i+1]
+			if list[i] > list[i+1]:
+				temp = list[i]
+				list[i] = list[i+1]
+				list[i+1] = temp
+
+	return list
+
+list = [54,26,93,17,77,31,44,55,20]
+# print bubblesort(list)
+
+#__________________________________________
+
+def fizzbuzz(n):
+    # Write your code here
+    # To print results to the standard output you can use print
+    # Example: print "Hello world!"
+  
+    for i in range(1,n+1):
+      
+        if i % 15 == 0:
+            print "FizzBuzz"
+        elif i % 5 == 0:
+            print "Buzz"
+        elif i % 3 == 0:
+            print "Fizz"
+       	else:
+       		print i
+
+# fizzbuzz(15)
+
+# def fizzbuzz(n):
+#     # Write your code here.
+#     for i in range(1, n+1):
+#         print "Fizz"*(i%3 == 0) + "Buzz"*(i%5 == 0) or i
+
+# fizzbuzz(15)
+
+#__________________________________________
+
+def find_missing_number(v):
+    # Write your code here
+    # To print results to the standard output you can use print
+    # Example: print "Hello world!"
+    firstList = v
+    secondList = range(1,len(v)+2)
+
+    d=collections.defaultdict(int)
+
+    for num in firstList:
+    	d[num]+=1
+
+    for num in secondList:
+    	if d[num] == 0:
+    		return num
+    	else:
+        	d[num]-=1
+
+# print find_missing_number([1,2,3,4,6])
+
 
 #__________________________________________
 
@@ -985,7 +1285,7 @@ def count_up(target, n):
 
 def findTop10ID (filetext):
 
-	filename = open(filetext, 'r') # open and read the file
+	filename = open(filetext) # open the file
 
 	fileStrip = filename.read().splitlines() # removes the \n
 
