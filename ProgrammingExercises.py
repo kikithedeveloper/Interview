@@ -240,7 +240,7 @@ class LinkedList(object):
 			print n.data
 			n = n.next
 
-	def delete(self,pos):
+	def delete_at(self,pos):
 
 		n = self.head
 
@@ -443,11 +443,11 @@ class LinkedList(object):
 
 # l.append(5)
 
-# l.insert("Hello", 4)
+# l.insert("Hello", 0)
 
-# l.delete(3)
+# l.delete_at(3)
 
-# l.delete(4)
+# l.delete_at(4)
 
 # l.removeDuplicate()
 
@@ -457,7 +457,7 @@ class LinkedList(object):
 
 # l.partition(79)
 
-# l.traverse()
+l.traverse()
 
 
 
@@ -1280,6 +1280,106 @@ def find_missing_number(v):
 #__________________________________________
 
 #__________________________________________
+
+# Coding exercises for LaunchCode
+
+def LaunchCode(n):
+	
+	# better start with the highest then to lowest.
+	
+	for i in range(1, n+1):
+		
+		if i % 56 == 0:
+			print "LaunchCodeSTL"
+		
+		elif i % 4 == 0 and i % 7 == 0:
+			print "LaunchCode"
+		
+		elif i % 7 == 0:
+			print "Code"
+		
+		elif i % 4 == 0:
+			print "Launch"
+		
+		else:
+			print i
+
+# LaunchCode(60)
+
+# def findKdiff(n, k):
+
+# 	intList = (list(range(1,n+1)))
+
+# 	intList.reverse()
+
+# 	pairs = 0
+
+# 	for i in intList:
+# 		for j in intList:
+# 			if i - j == k:
+# 				print (i,j)
+# 				pairs += 1
+
+# 	print "The total pairs are " + str(pairs)
+
+# findKdiff(5,2)
+
+# Find the difference of K
+
+def findKdiff(n, k):
+
+	intList = n
+
+	intList.reverse()
+
+	pairs = 0
+
+	for i in intList:
+		for j in intList:
+			if i - j == k:
+				print (i,j)
+				pairs += 1
+
+	#print "The total pairs are " + str(pairs)
+	print pairs
+
+# findKdiff([363374326, 364147530, 61825163, 1073065718, 1281246024, 1399469912, 428047635, 491595254, 879792181, 1069262793],1)
+
+
+
+def getIntegerComplement(n):
+
+	# print bin(n) 110010   -> 011011
+
+	# print bin(50) # 110010 -> 001101
+ 
+	# print int('001101', 2)
+
+	# print n
+
+	# print bin(n)
+
+	intList = list(bin(n))
+
+	newList = intList[2:]
+
+	# print newList
+
+	for i in range(len(newList)):
+		if newList[i] == '0':
+			newList[i] = '1'
+		elif newList[i] == '1':
+			newList[i] = '0'
+
+	inverseBin = "".join(newList)
+
+	# print inverseBin
+
+	print int(inverseBin, 2)
+
+
+# getIntegerComplement(100)
+
 
 #__________________________________________
 

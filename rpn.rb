@@ -1,5 +1,5 @@
 # Kimberly Lin
-# Deaf Hackbright Graduate
+# Hackbright Graduate
 
 # -------------------- ASSIGNMENT --------------------
 # Implement a RPN evaluator in Ruby. It should be able to evaluate 
@@ -44,33 +44,70 @@ class RPNCalculator
 		if sequence.length < 3
 			puts "Not enough arguments"
 		else
+			# puts sequence.inspect
 			sequence.each do |i|
 				if i.match(/[0-9]/) != nil
 					inputArray.push(i)
-					# Order of Operations - Multiply or Divide before Add or Subtract
-				elsif i == "*"
-					inputArray.push(multiply(inputArray.pop(2)))
-				elsif i == "/"
-					inputArray.push(divide(inputArray.pop(2)))
-				elsif i == "+"
-					inputArray.push(add(inputArray.pop(2)))
-				elsif i == "-"
-					inputArray.push(subtract(inputArray.pop(2)))
+				else
+				# 	# Order of Operations - Multiply or Divide before Add or Subtract
+				# elsif i == "*"
+				# 	inputArray.push(multiply(inputArray.pop(2)))
+				# elsif i == "/"
+				# 	inputArray.push(divide(inputArray.pop(2)))
+				# elsif i == "+"
+				# 	inputArray.push(add(inputArray.pop(2)))
+				# elsif i == "-"
+				# 	inputArray.push(subtract(inputArray.pop(2)))
+				# 	puts "array: #{inputArray}"
+				# 	puts "op: #{i}"
+					inputArray.push(operator(inputArray.pop(2), i))
 				end
 			end
 
 			if inputArray.length == 1
 				# puts inputArray[0]
-				begin
+				# begin
+				if !inputArray[0].nil?
 					if inputArray[0] % 1 == 0 # check for decimals
 						split = inputArray[0].to_s.split(".")
 						puts atoi(split[0]).to_s
 					else # no decimal, all go
 						puts inputArray[0].to_s
+						# puts
 					end
-				rescue NoMethodError # avoid this error message
 				end
+				# rescue NoMethodError # avoid this error message1
+				# end
 			end
+		end
+	end
+
+	# new method to make this more concise and shorter than 
+	# having four redundant methods using the same lines over and over
+	def operator(array, operator)
+		if array.length == 2
+			# puts "array: #{array}"
+			# puts "op: #{operator}"
+			a = atof(array[0])
+			b = atof(array[1])
+			
+			# if else stmts for operators
+			result = if operator == "*"
+				a * b
+			elsif operator == "/"
+				a / b
+			elsif operator == "+"
+				a + b
+			elsif operator == "-"
+				a - b
+			else
+				"invalid operator"
+			end
+
+			# result = a + b
+			return result if !result.nil?
+		# else
+		# 	puts "Invalid input"
 		end
 	end
 
@@ -120,37 +157,44 @@ class RPNCalculator
 
 	def atoi(strNum)
 		
-		found = false
+		# found = false
 		
-		for i in strNum.split("")
-			if i == "."
-				found = true
-			end 
-		end
+		# for i in strNum.split("")
+		# 	if i == "."
+		# 		found = true
+		# 	end 
+		# end
 
-		if found == true
+		# if found == true
+		# 	ascii = strNum.bytes
+		# 	puts ascii.inspect
+		# 	asciiValue = ascii.map do |num|
+		# 		num - 48 # 48 starts at 0 in ascii
+		# 	end
+		# 	print asciiValue
+		# 	result = asciiValue.inject do |value, concat_to_value| 
+		# 		tempValue = value * 10 # avoids overlapping
+		# 		concatenate = tempValue + concat_to_value
+		# 	end
+		# else
 			ascii = strNum.bytes
-			# print ascii
+			# puts "bytes: #{ascii.inspect}"
 			asciiValue = ascii.map do |num|
 				num - 48 # 48 starts at 0 in ascii
 			end
-			# print asciiValue
+			# puts "converts to right number: #{asciiValue.inspect}"
+			
+			# puts "begin reduction of the array together"
+
 			result = asciiValue.inject do |value, concat_to_value| 
+				# puts "first value: #{value}"
 				tempValue = value * 10 # avoids overlapping
+				# puts "new value: #{tempValue}"
 				concatenate = tempValue + concat_to_value
+				# puts "concatenated together: #{concatenate}"
+				# concatenate
 			end
-		else
-			ascii = strNum.bytes
-			# print ascii
-			asciiValue = ascii.map do |num|
-				num - 48 # 48 starts at 0 in ascii
-			end
-			# print asciiValue
-			result = asciiValue.inject do |value, concat_to_value| 
-				tempValue = value * 10 # avoids overlapping
-				concatenate = tempValue + concat_to_value
-			end
-		end
+		# end
 		return result
 	end
 
@@ -245,7 +289,7 @@ rpn.evaluate()
 	# I still need the "if inputArray[0] % 1 == 0" on line 65 to check if there are decimals.
 	# So I used begin and rescue functions to catch the unneccessary error.
 
-# puts rpn.atoi("100") - Pass!
+# puts rpn.atoi("123")
 
 # puts rpn.atof("100.55") - Pass!
 
