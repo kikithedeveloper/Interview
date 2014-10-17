@@ -1,3 +1,16 @@
+"""
+1) send her the problem with reinstated input, output, and process. "break down the problem"
+
+3) pseudocode and send her actual code
+
+4) do it yourself, REALLY solve the problem yourself and post it on github gist and send it to Liz
+
+5) wait for feedbacks and try to optimize your code.
+"""
+
+
+
+
 # STRING AND ARRAY
 
 # 1.1
@@ -21,6 +34,26 @@ def unique(string):
 # print unique("Aviva") # test should return False.
 
 # print unique("Kimberly") # test should return True.
+
+#__________________________________________
+
+
+def FirstReverse(str): 
+
+  string = list(str)
+  
+  for i in range(len(string)/2):
+	temp = string[-i-1]
+	string[-i-1] = string[i]
+	string[i] = temp
+   
+  newString = "".join(string)
+
+  return newString
+	
+# keep this function call here  
+# to see how to enter arguments in Python scroll down
+# print FirstReverse("I love Chi Ming.")
 
 #__________________________________________
 
@@ -170,13 +203,110 @@ import math
 
 def is_square(integer):
 	number = math.sqrt(integer)
+
 	if int(number + 0.5)**2 == integer: 
 		return True
 	else:
 		return False
 
-# for i in range(4, 20):
+# for i in range(4, 25+1):
 #    print i, is_square(i)
+
+#__________________________________________
+
+
+# def check_braces(expressions):
+
+# 	for expr in expressions:
+
+# 		stack = []
+
+# 		if len(expr) % 2 != 0: 
+# 			print 0
+		
+# 		else:
+# 			opening = set('([{') 
+# 			match = set([('(',')'), ('[',']'), ('{','}')]) 
+
+# 			for char in expr: 
+# 				if char in opening: 
+# 					stack.append(char)
+# 				else: 
+# 					if len(stack) != 0: 
+# 						lastOpen = stack.pop()
+# 						# print "is it matching?", lastOpen, char
+# 						if (lastOpen, char) not in match: 
+# 							print 0
+# 							break
+
+# 			if len(stack)==0:
+# 				print 1
+
+# check_braces([")(){}","[]({})","([])","{()[]}","(({))"])
+
+#__________________________________________
+
+
+def check_anagrams(first_words, second_words):
+	# Write your code here
+	# To print results to the standard output you can use print
+	# Example print "Hello world!"
+
+	for i in range(len(first_words)):
+		
+		# print sorted(first_words[i])
+
+		# print sorted(second_words[i])
+
+		if sorted(first_words[i]) == sorted(second_words[i]):
+			print 1
+		else:
+			print 0
+
+# check_anagrams(["cinema","host","aba","train"], ["iceman","shot","bab","rain"])
+
+# List1 = ["cinema","host","aba","train", "god"]
+# List2 = ["iceman","shot","bab","rain", "dog"]
+
+# def check_anagrams(first_words, second_words):
+#     # Write your code here
+#     sortedList1 = []
+#     sortedList2 = []
+
+#     for word in first_words:
+#         split = list(word)
+#         # print split
+#         split.sort()
+#         # print split
+#         sortedWord = split
+#         # print sortedWord
+#         new_word = "".join(sortedWord)
+#         # print new_word
+#         sortedList1.append(new_word)
+
+#     for word in second_words:
+#         split = list(word)
+#         # print split
+#         split.sort()
+#         # print split
+#         sortedWord = split
+#         # print sortedWord
+#         new_word = "".join(sortedWord)
+#         # print new_word
+#         sortedList2.append(new_word)
+
+#     print sortedList1
+#     print sortedList2
+	
+#     for i in sortedList1:
+#         if i in sortedList2:
+#             print "1 - anagram"
+#         else:
+#             print "0 - not anagram"
+
+
+# check_anagrams(List1,List2)
+
 
 #__________________________________________
 
@@ -184,13 +314,13 @@ def is_square(integer):
 
 # Implement a singly linked list from scratch
 
-class Node(object):
+class Node():
 
 	def __init__(self, data):
 		self.data = data
 		self.next = None
 
-class LinkedList(object):
+class LinkedList():
 
 	def __init__(self):
 		self.head = None
@@ -250,16 +380,11 @@ class LinkedList(object):
 			n = n.next
 			counter += 1
 
-		if n.next.next != None:
-			n.next = n.next.next
-			n = n.next
-			del(n)
+		temp = n.next
+		n.next = n.next.next	
 
-		else:
+		if n.next == None:
 			self.tail = n
-			n = n.next
-			del(n)
-
 
 	# 2.1
 	# Write code to remove duplicates from an unsorted linked list.
@@ -386,6 +511,7 @@ class LinkedList(object):
 
 	# def reverse(self):
 	# 	current = self.head
+	# 	self.tail = current
 	# 	previous = None
 	# 	next = None
 
@@ -405,6 +531,9 @@ class LinkedList(object):
 
 	# 	return previous
 
+
+
+
 # l = LinkedList()
 
 # l.append(1)
@@ -419,17 +548,17 @@ class LinkedList(object):
 
 # # l.reverse()
 
-# l.traverse()
+# # l.traverse()
 
-# l.append(3)
+# # l.append(3)
 
-# l.append(4)
+# # l.append(4)
 
-# l.append(4)
+# # l.append(4)
 
-# l.append(5)
+# # l.append(5)
 
-# l.append(40)
+# # l.append(40)
 
 # l.append(79)
 
@@ -439,9 +568,9 @@ class LinkedList(object):
 
 # l.append(100)
 
-# l.append(5)
+# # l.append(5)
 
-# l.append(5)
+# # l.append(5)
 
 # l.insert("Hello", 0)
 
@@ -449,22 +578,161 @@ class LinkedList(object):
 
 # l.delete_at(4)
 
-# l.removeDuplicate()
+# # l.removeDuplicate()
 
 # l.findkth(4)
 
-# l.deleteNode("hello")
+# # l.deleteNode("hello")
 
-# l.partition(79)
+# # l.partition(79)
 
-l.traverse()
+# # l.reverse()
+
+# l.traverse()
 
 
 
 
 #__________________________________________
 
-# BINARY TREE
+# Note from Hackbright
+"""
+class BinaryTreeNode:
+	def __init__(self, value):
+		pass
+
+	def get_left(self):
+		pass
+
+	def set_left(self, node):
+		pass
+
+	def get_right(self):
+		pass
+
+	def set_right(self, node):
+		pass
+
+	def get_value(self):
+		pass
+
+	def set_value(self, number):
+		pass
+
+def depth_first_traversal(node):
+	pass
+
+
+"""
+
+# Regular Binary Tree
+
+class Node(object):
+	
+	def __init__(self, data):
+		self.data = data
+		self.left = None
+		self.right = None
+
+class BinaryTreeNode:
+	def __init__(self):
+		self.root = None
+
+	def get_left(self):
+		if self.root == None:
+			return None
+		else:
+			root = self.root
+			while root:
+				if root.left == None:
+					return "The node at the left is '%s'." % (root.data)
+				root = root.left
+
+	def set_left(self, data):
+		if self.root == None:
+			self.root = Node(data)
+			return "Set the starting node '%s'." % (data)
+		else:
+			root = self.root
+			while root:
+				if root.left == None:
+					root.left = Node(data)
+					return "Set the node, '%s', at left." % (root.left.data)
+				root = root.left
+
+	def get_right(self):
+		if self.root == None:
+			return None
+		else:
+			root = self.root
+			while root:
+				if root.right == None:
+					return "The node at the right is '%s'." % (root.data)
+				root = root.right
+
+	def set_right(self, data):
+		if self.root == None:
+			self.root = Node(data)
+			return "Set the starting node, '%s'." % (data)
+		else:
+			root = self.root
+			while root:
+				if root.right == None:
+					root.right = Node(data)
+					return "Set the node, '%s', at right." % (root.right.data)
+				root = root.right
+
+
+	# Stuck on this. Take time off to think about it.
+
+	# def get_value(self,target):
+
+	# 	if self.root.data == target:
+	# 		return self.root.data
+
+	# 	else:
+
+	# 		root = self.root
+
+	# 		if root.left:
+	# 			return root.left.get_value(target)
+
+	# 		if root.right:
+	# 			return root.right.get_value(target)
+
+	# def set_value(self, number):
+	# 	pass
+
+	# def depth_first_traversal(node):
+	# 	pass
+
+# tree = BinaryTreeNode()
+
+# print tree.set_left("Hello")
+
+# print tree.set_left("World")
+
+# print tree.get_left()
+
+# print tree.set_right("Kimberly")
+
+# print tree.get_right()
+
+# print tree.set_right("Lin")
+
+# print tree.get_right()
+
+# print tree.get_value("Lin")
+
+
+
+
+#__________________________________________
+
+
+# BINARY SEARCH TREE
+# a BST is a tree where the left node is less than the root
+# and the right node is greater than the root.
 
 # Implement a tree from scratch.
 
@@ -482,6 +750,7 @@ class BinaryTree():
 
 	# class Node(object):
 	
+
 	# 	def __init__(self, data):
 	# 		self.data = data
 	# 		self.left = None
@@ -532,6 +801,21 @@ class BinaryTree():
 					return "The node at the very left is " + str(root.data)
 
 				root = root.left
+
+	# def setLeft(self,data):
+
+	# 	if self.root is None:
+	# 		return None
+
+	# 	else:
+	# 		root = self.root
+
+	# 		while root:
+
+	# 			if root.left is None:
+	# 				root.left = Node(data)
+
+	# 			root = root.left	
 
 	def getRight(self):
 
@@ -633,19 +917,27 @@ class BinaryTree():
 	# 		return self.dfsRecursive(n.right, target)
 
 
-tree = BinaryTree()
+# tree = BinaryTree()
 
-tree.insert(5)
+# tree.insert(3)
 
-tree.insert(4)
+# tree.insert(5)
 
-tree.insert(6)
+# tree.insert(4)
 
-tree.insert(7)
+# tree.insert(6)
 
-tree.insert(2)
+# tree.insert(7)
 
-tree.insert(1)
+# tree.insert(2)
+
+# tree.insert(1)
+
+# print tree.getLeft()
+
+# print tree.getLeft()
+
+# print tree.getRight()
 
 # print tree.getLeft()
 
@@ -1017,20 +1309,20 @@ list = [54,26,93,17,77,31,44,55,20]
 #__________________________________________
 
 def fizzbuzz(n):
-    # Write your code here
-    # To print results to the standard output you can use print
-    # Example: print "Hello world!"
+	# Write your code here
+	# To print results to the standard output you can use print
+	# Example: print "Hello world!"
   
-    for i in range(1,n+1):
-      
-        if i % 15 == 0:
-            print "FizzBuzz"
-        elif i % 5 == 0:
-            print "Buzz"
-        elif i % 3 == 0:
-            print "Fizz"
-       	else:
-       		print i
+	for i in range(1,n+1):
+	  
+		if i % 15 == 0:
+			print "FizzBuzz"
+		elif i % 5 == 0:
+			print "Buzz"
+		elif i % 3 == 0:
+			print "Fizz"
+		else:
+			print i
 
 # fizzbuzz(15)
 
@@ -1044,22 +1336,22 @@ def fizzbuzz(n):
 #__________________________________________
 
 def find_missing_number(v):
-    # Write your code here
-    # To print results to the standard output you can use print
-    # Example: print "Hello world!"
-    firstList = v
-    secondList = range(1,len(v)+2)
+	# Write your code here
+	# To print results to the standard output you can use print
+	# Example: print "Hello world!"
+	firstList = v
+	secondList = range(1,len(v)+2)
 
-    d=collections.defaultdict(int)
+	d=collections.defaultdict(int)
 
-    for num in firstList:
-    	d[num]+=1
+	for num in firstList:
+		d[num]+=1
 
-    for num in secondList:
-    	if d[num] == 0:
-    		return num
-    	else:
-        	d[num]-=1
+	for num in secondList:
+		if d[num] == 0:
+			return num
+		else:
+			d[num]-=1
 
 # print find_missing_number([1,2,3,4,6])
 
@@ -1067,33 +1359,362 @@ def find_missing_number(v):
 #__________________________________________
 
 
+"""
+10/12/2014
 
+PROJECT EULER Problem 1 - 14
 
+Save them in Gists (http://gist.github.com) and send to Liz.
 
+Also, send me a first round data model for your ASL app.
 
+Take a look at https://github.com/lizTheDeveloper/Interview-Prep for a few more questions to drill over. Send me the solutions without running them, and I'll go over your thinking process in the comments. 
 
+See you Monday at 10AM!
+"""
 
+# Problem 1 - Multiple of 3 and 5
 
+'''If we list all the natural numbers below 10 that are multiples of 3 or 5, 
+we get 3, 5, 6 and 9. The sum of these multiples is 23.
+Find the sum of all the multiples of 3 or 5 below 1000.'''
 
+def sum_of_multiples(n):
 
+	multi_list = []
 
+	for multiple in range(1,n):
+		
+		if multiple % 5 == 0:
+			multi_list.append(multiple)
 
+		elif multiple % 3 == 0:
+			multi_list.append(multiple)
 
+		else:
+			continue
 
+	return sum(multi_list)
 
+# print sum_of_multiples(1000)
 
+#__________________________________________
+
+# Problem 2 - Even Fibonacci numbers
+
+'''Each new term in the Fibonacci sequence is generated by adding the previous two terms. 
+By starting with 1 and 2, the first 10 terms will be:
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
+By considering the terms in the Fibonacci sequence whose values do not exceed four million, 
+find the sum of the even-valued terms.'''
+
+def fib(n):
+	
+	if n <= 1:
+		return n
+	else:
+		return fib(n-1) + fib(n-2)
+
+def even_fib():
+
+	even_terms = []
+
+	i = 0
+
+	fib_value = 0
+
+	while fib_value < 4000000:
 
+		if fib(i) % 2 == 0:
+			even_terms.append(fib(i))
 
+		fib_value = fib(i)
 
+		i += 1
+
+	print even_terms
+
+	return sum(even_terms)
+
+# print even_fib() # Warning, this takes a really long time to compile......
+
 #__________________________________________
+
+# Problem 3
+
+# The prime factors of 13195 are 5, 7, 13 and 29.
+# What is the largest prime factor of the number 600851475143?
+
 #__________________________________________
+
+# Problem 4
+"""A palindromic number reads the same both ways.
+The largest palindrome made from the product of two 2-digit numbers is 9009.
+91 x 99 = 9009. Find the largest palindrome made from the product of two 3-digit numbers."""
+
+def isPalindrome(string):
 
+	# print len(string)
+
+	if len(string) == 0:
+		return True
+
+	# print string[0] + " and " + string[-1]
+
+	if string[0] == string[-1]:
+		return isPalindrome(string[1:-1])
+
+	return False
+
+# print isPalindrome("1101011")
+
 #__________________________________________
+
+# def palindromicNumber(): This is a very bad approach. 
+# I didn't realize until now that I was decrementing the wrong way.
+
+# 	digit1 = 999
+# 	digit2 = 999
+
+# 	while digit1 >= 100:
+		
+# 		while digit2 > 100:
 
+# 			if isPalindrome(str(digit1*digit2)) == True:
+# 				return digit1 * digit2, digit1, digit2
+			
+# 			digit2 -= 1
+
+# 		if isPalindrome(str(digit1*digit2)) == True:
+# 			return digit1 * digit2, digit1, digit2
+			
+# 		digit1 -= 1
+
+# 	return "There is no palindromic number."
+
+# print palindromicNumber()
+
 #__________________________________________
+
+def palindromicNumber():
+
+	pali_nums = []
+
+	for i in range(999,99,-1):
+		for j in range(999,99,-1):
+
+			# print i , j
+
+			if isPalindrome(str(i*j)) == True:
+				pali_nums.append(([i,j],i*j))	
+
+	largestPal = pali_nums[0][1]
+	multiples = None
 
+	for a, b in pali_nums:
+		if b > largestPal:
+			largestPal = b
+			multiples = a
+			
+	return largestPal
+
+# print palindromicNumber()
+
 #__________________________________________
+
+# Problem 5
+
+"""
+2520 is the smallest number that can be divided by 
+each of the numbers from 1 to 10 without any remainder.
+What is the smallest positive number that is evenly divisible 
+by all of the numbers from 1 to 20?
+"""
+
+# Focus on other numbers that are prime. 2, 3, 5, 7, 11, 13, 17, 19.
+
+# Then check if it's divisible by 20, then I don't need to divide it by 10, 5, 4, 2, 1.
+
+# 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 # 1 is not needed.
+
+# common_number = [20, 10, 5, 4, 2, 18, 9, 6]
+
+# prime = [3, 7, 11, 13, 17, 19]
+
+# numberRemaining = [8, 12, 14, 15, 16, 18]
+
+def smallest_number():
+
+	number = 1
+
+	while True:
+
+		# if number % 19 == 0 and number % 17 == 0 and number % 13 == 0 and number % 11 == 0 and number % 7 == 0 and number % 3 == 0 and number % 2 == 0 and number % :
+		
+		if number % 20 == 0 and number % 19 == 0 and number % 18 == 0 and number % 17 == 0 and number % 16 == 0 and number % 15 == 0 and number % 14 == 0 and number % 13 == 0 and number % 12 == 0 and number % 11 == 0:
+			return number
+		else:
+			number += 1
+			print number
+		
+		# if number % 20 == 0: # covers 10, 5
+		# 	pass
+		# else:
+		# 	number += 1
+		# 	print number
+		# 	break
+
+		# if number % 18 == 0: # covers 9, 6
+		# 	pass
+		# else:
+		# 	number += 1
+		# 	print number
+		# 	break
+
+		# if number % 16 == 0: # covers 8, 4
+		# 	pass
+		# else:
+		# 	number += 1
+		# 	print number
+		# 	break
+
+		# found = True
+	
+	# return number
+
+# print smallest_number() # answer is 232792560. 
+
+#__________________________________________
+
+# def smallest_number():
+
+# 	number = 0
+
+# 	found = False
+
+# 	while found != True:
+
+# 		if number % 20 == 0:
+# 			if number % 19 == 0:
+# 				if number % 18 == 0:
+# 					if number % 17 == 0:
+# 						if number % 16 == 0:
+# 							if number % 15 == 0:
+# 								if number % 14 == 0:
+# 									if number % 13 == 0:
+# 										if number % 12 == 0:
+# 											if number % 11 == 0: 
+# 												if number % 10 == 0:
+# 													if number % 9 == 0:
+# 														if number % 8 == 0:
+# 															if number % 7 == 0:
+# 																if number % 6 == 0:
+# 																	if number % 5 == 0:
+# 																		if number % 4 == 0:
+# 																			if number % 3 == 0:
+# 																				if number % 2 == 0:
+# 																					if number % 1 == 0:
+# 																						found = True
+# 																					else:
+# 																						number += 1
+# 																						break
+# 																				else:
+# 																					number += 1
+# 																					break
+# 																			else:
+# 																				number += 1
+# 																				break
+# 																		else:
+# 																			number += 1
+# 																			break
+# 																	else:
+# 																		number += 1
+# 																		break
+# 																else:
+# 																	number += 1
+# 																	break
+# 															else:
+# 																number += 1
+# 																break
+# 														else:
+# 															number += 1
+# 															break	
+# 													else:
+# 														number += 1
+# 														break
+# 												else:
+# 													number += 1
+# 													break	
+# 											else:
+# 												number += 1
+# 												break				
+# 										else:
+# 											number += 1
+# 											break
+# 									else:
+# 										number += 1
+# 										break
+# 								else:
+# 									number += 1
+# 									break
+# 							else:
+# 								number += 1
+# 								break
+# 						else:
+# 							number += 1
+# 							break
+# 					else:
+# 						number += 1
+# 						break
+# 				else:
+# 					number += 1
+# 					break
+# 			else:
+# 				number += 1
+# 				break
+# 		else:
+# 			number += 1
+# 			break
+
+# 	return number
+
+# print smallest_number()
+
+
+# def smallest_number(a,b):
+
+# 	number = 0
+
+# 	found = False
 
+# 	while found != True:
+
+# 		for i in range(a,b+1):
+# 			if number % i != 0:
+# 				number += 1
+# 				break
+# 			else:
+
+
+# 		if number % a == 0:
+			
+# 		else:
+# 			number += 1
+
+# 		# for i in range(a,b+1):
+# 		# 	if number % i == 0:
+# 		# 		pass
+# 		# 	else:
+# 		# 		break
+
+# 		# if number % 20
+
+
+# 		number += 1
+
+
+
+
 #__________________________________________
 #__________________________________________
 
@@ -1278,6 +1899,28 @@ def find_missing_number(v):
 #__________________________________________
 
 #__________________________________________
+
+# LaunchCode Interview
+
+# Return the largest integer and all the indices of the largest integer in the array.
+
+def indexLargest (arr):
+	
+	largestIndex = []
+
+	largest = arr[0] 
+
+	for i in range(len(arr)):
+		if arr[i] >= largest:
+			largest = arr[i]
+
+	for i in range(len(arr)):
+		if arr[i] == largest:
+			largestIndex.append(i)
+
+	return largest, largestIndex
+
+# print indexLargest([1,3,5,5,4,2])
 
 #__________________________________________
 

@@ -41,11 +41,14 @@ class RPNCalculator
 		sequence = gets.chomp.split()
 		inputArray = []
 
-		if sequence.length < 3
-			puts "Not enough arguments"
-		else
+		# if sequence.length < 3
+		# 	puts "Not enough arguments"
+		# else
+		if sequence
 			# puts sequence.inspect
 			sequence.each do |i|
+				# if i.match(/[a-zA-Z]/) != nil
+				# 	puts "Invalid input"
 				if i.match(/[0-9]/) != nil
 					inputArray.push(i)
 				else
@@ -60,9 +63,17 @@ class RPNCalculator
 				# 	inputArray.push(subtract(inputArray.pop(2)))
 				# 	puts "array: #{inputArray}"
 				# 	puts "op: #{i}"
-					inputArray.push(operator(inputArray.pop(2), i))
+					
+					# if i != "sum"
+					# 	inputArray.push(operator(inputArray.pop(2), i))
+					# else
+						inputArray = operator(inputArray.pop(inputArray.length), i)
+					# end
+					
+
 				end
 			end
+
 
 			if inputArray.length == 1
 				# puts inputArray[0]
@@ -70,9 +81,9 @@ class RPNCalculator
 				if !inputArray[0].nil?
 					if inputArray[0] % 1 == 0 # check for decimals
 						split = inputArray[0].to_s.split(".")
-						puts atoi(split[0]).to_s
+						puts atoi(split[0])
 					else # no decimal, all go
-						puts inputArray[0].to_s
+						puts inputArray[0]
 						# puts
 					end
 				end
@@ -83,77 +94,97 @@ class RPNCalculator
 	end
 
 	# new method to make this more concise and shorter than 
-	# having four redundant methods using the same lines over and over
+	# having four methods using the same lines over and over
 	def operator(array, operator)
-		if array.length == 2
-			# puts "array: #{array}"
-			# puts "op: #{operator}"
-			a = atof(array[0])
-			b = atof(array[1])
+		if operator != "sum"
 			
-			# if else stmts for operators
-			result = if operator == "*"
-				a * b
-			elsif operator == "/"
-				a / b
-			elsif operator == "+"
-				a + b
-			elsif operator == "-"
-				a - b
-			else
-				"invalid operator"
+			if array.length >= 2
+				b, a = atof(array.pop), atof(array.pop)
+				# puts "array: #{array}"
+				# puts "op: #{operator}"
+				# a = atof(array[0])
+				# b = atof(array[1])
+				# [2, 4, 5, '*', '+']
+				# [4, 5] '*' ==> 20
+				# [2, 4, 5] '*' ==> [2, 20]
+				# [2, 20] '+'
+				# if else stmts for operators
+				result = if operator == "*"
+				 a * b
+				elsif operator == "/"
+					a / b
+				elsif operator == "+"
+					a + b
+				else #operator == "-"
+					a - b
+				end
+			
+
+				array.push(result)
+
+				return array if !result.nil?
+
+			# else
+			# 	puts "Invalid input"
+
 			end
 
-			# result = a + b
-			return result if !result.nil?
-		# else
-		# 	puts "Invalid input"
-		end
+		else
+
+			num = 0
+
+			array.each do |n|
+				num += atof(n)
+			end
+
+			return [num]
+
+		end	
 	end
 
-	def add(array)
-		if array.length == 2
-			a = atof(array[0])
-			b = atof(array[1])
-			result = a + b
-			return result
-		else
-			puts "Invalid input"
-		end
-	end
+	# def add(array)
+	# 	if array.length == 2
+	# 		a = atof(array[0])
+	# 		b = atof(array[1])
+	# 		result = a + b
+	# 		return result
+	# 	else
+	# 		puts "Invalid input"
+	# 	end
+	# end
 
-	def subtract(array)
-		if array.length == 2
-			a = atof(array[0])
-			b = atof(array[1])
-			result = a - b
-			return result
-		else
-			puts "Invalid input"
-		end
-	end
+	# def subtract(array)
+	# 	if array.length == 2
+	# 		a = atof(array[0])
+	# 		b = atof(array[1])
+	# 		result = a - b
+	# 		return result
+	# 	else
+	# 		puts "Invalid input"
+	# 	end
+	# end
 
-	def multiply(array)
-		if array.length == 2
-			a = atof(array[0])
-			b = atof(array[1])
-			result = a * b
-			return result
-		else
-			puts "Invalid input"
-		end
-	end
+	# def multiply(array)
+	# 	if array.length == 2
+	# 		a = atof(array[0])
+	# 		b = atof(array[1])
+	# 		result = a * b
+	# 		return result
+	# 	else
+	# 		puts "Invalid input"
+	# 	end
+	# end
 
-	def divide(array)
-		if array.length == 2
-			a = atof(array[0])
-			b = atof(array[1])
-			result = a / b
-			return result
-		else
-			puts "Invalid input"
-		end
-	end
+	# def divide(array)
+	# 	if array.length == 2
+	# 		a = atof(array[0])
+	# 		b = atof(array[1])
+	# 		result = a / b
+	# 		return result
+	# 	else
+	# 		puts "Invalid input"
+	# 	end
+	# end
 
 	def atoi(strNum)
 		
@@ -183,8 +214,6 @@ class RPNCalculator
 				num - 48 # 48 starts at 0 in ascii
 			end
 			# puts "converts to right number: #{asciiValue.inspect}"
-			
-			# puts "begin reduction of the array together"
 
 			result = asciiValue.inject do |value, concat_to_value| 
 				# puts "first value: #{value}"
@@ -204,6 +233,7 @@ class RPNCalculator
 
 		strNum = strNum.to_s
 		
+		# this validates whether or not it has a decimal
 		for i in strNum.split("")
 			# puts i
 			if i == "."
@@ -211,12 +241,13 @@ class RPNCalculator
 			end 
 		end 
 
+		# this will pass only if the string is validated
 		if found == true
 			array = strNum.split(".")
 			# puts array
 			a = atoi(array[0])
 			# puts a
-			b = atoi(array[1]) / (10.0 ** array[1].length)
+			b = atoi(array[1]) / (10.0 ** array[1].length) # this will ensure the right length in the decimal
 			# puts b
 			return a + b
 		else
@@ -289,11 +320,11 @@ rpn.evaluate()
 	# I still need the "if inputArray[0] % 1 == 0" on line 65 to check if there are decimals.
 	# So I used begin and rescue functions to catch the unneccessary error.
 
-# puts rpn.atoi("123")
+# puts rpn.atoi("123") # - pass!
 
-# puts rpn.atof("100.55") - Pass!
+# puts rpn.atof("255.55") # - Pass!
 
-# puts rpn.atof("15876") - Pass!
+# puts rpn.atof("15876") # - Pass!
 
 
 

@@ -658,9 +658,10 @@ class LinkedList
 			if n.next.nil?
 				@tail = n
 			end
-
 		end
+
 		puts "Removed the node #{temp.data} at index #{pos}. "
+	
 	end
 
 
@@ -701,11 +702,11 @@ l = LinkedList.new # pass!
 
 # l.delete(5) # pass! 
 
-l.append("A")
-l.append("B")
-l.append("C")
-l.append("D")
-l.append("E")
+# l.append("A")
+# l.append("B")
+# l.append("C")
+# l.append("D")
+# l.append("E")
 
 # l.delete_at(0) # remove 1st node A - pass!
 
@@ -770,6 +771,49 @@ class BinaryTree
 		end
 	end
 
+	def findLeft(root)
+		
+		if root == nil
+			return
+		else	
+			while root
+
+				if root.left == nil
+					puts "The node at the very left is " + (root.data).to_s
+				end
+
+				root = root.left
+
+			end
+		end
+	end
+
+	def findRight(root)
+		if root == nil
+			return
+		else
+			while root
+				
+				if root.right == nil
+					puts "The node at the very right is " + (root.data).to_s
+				end
+
+				root = root.right
+
+			end
+		end
+	end
+
+	def preorder(node)
+		if node == nil
+			return
+		else
+			puts node.data
+			self.preorder(node.left)
+			self.preorder(node.right)
+		end
+	end
+
 	def inorder(node)
 		if node == nil
 			return
@@ -780,6 +824,58 @@ class BinaryTree
 		end
 	end
 
+	def postorder(node)
+		if node == nil
+			return
+		else
+			self.postorder(node.left)
+			self.postorder(node.right)
+			puts node.data
+		end
+	end
+
+	def dfsWhile(target)
+		n = @root
+		while n
+			if n.data == target
+				found = true
+				return true
+			end
+
+			if n.data < target
+				n = n.right
+			else
+				n = n.left
+			end
+		end
+		return false
+	end
+
+	def bfs(target)
+
+		q = [@root]
+
+		begin
+			while q
+				n = q.pop()
+				
+				if n.data == target
+					return true
+				end
+
+				if n.left
+					q.push(n.left)
+				end
+
+				if n.right
+					q.push(n.right)
+				end
+			end
+		rescue NoMethodError
+		end
+		return false
+	end
+
 end
 
 # t = BinaryTree.new
@@ -788,30 +884,321 @@ end
 
 # t.insert(3)
 
-# t.insert(1)
+# t.insert(7)
 
 # t.insert(2)
 
 # t.insert(4)
 
-# t.insert(7)
+# t.insert(1)
 
 # t.insert(6)
 
 # t.insert(8)
 
+# t.insert(10)
+
+# t.insert(9)
+
+# t.findLeft(t.root)
+
+# t.findRight(t.root)
+
+# t.preorder(t.root)
+
 # t.inorder(t.root)
 
+# t.postorder(t.root)
+
+# puts t.dfsWhile(10) # return true
+
+# puts t.dfsWhile(15) # return false
+
+# puts t.bfs(5) # return true
+
+# puts t.bfs(11) # return false
 
 #__________________________________________
+
+# Implement a Stack in Ruby
+
+
+class Stack
+	
+	def initialize
+		@elements = []
+	end
+
+	def length
+		puts @elements.length
+	end
+
+	def push(x)
+		@elements.push(x)
+	end
+
+	def pop
+		puts @elements.pop
+	end
+
+	def peek
+		puts @elements[-1]
+	end
+
+	def print
+		puts @elements.inspect
+	end
+
+end
+
+# stack = Stack.new
+
+# stack.push("A")
+
+# stack.push("B")
+
+# stack.push("C")
+
+# stack.print
+
+# stack.pop
+
+# stack.print
+
+# stack.peek
+
+# stack.length
+
+# stack.push("D")
+
+# stack.push("E")
+
+# stack.push("F")
+
+# stack.print
+
+# stack.length
+
+
 #__________________________________________
+
+class Queue
+	
+	def initialize
+		@elements = []
+	end
+
+	def length
+		puts @elements.length
+	end
+
+	def push(x)
+		@elements.insert(0,x)
+	end
+
+	def pop
+		puts @elements.pop
+	end
+
+	def peek
+		puts @elements[-1]
+	end
+
+	def print
+		puts @elements.inspect
+	end
+
+end
+
+# q = Queue.new
+
+# q.push("A")
+
+# q.push("B")
+
+# q.push("C")
+
+# q.print
+
+# q.pop
+
+# q.print
+
+
 #__________________________________________
+
+# Fibonacci
+# Recursively
+
+def fib(n)
+	if n <= 1
+		return n
+	else
+		return fib(n-1) + fib(n-2)
+	end
+end
+
+# puts fib(0)
+# puts fib(1)
+# puts fib(2)
+# puts fib(3)
+# puts fib(4)
+# puts fib(5)
+# puts fib(6)
+# puts fib(7)
+# puts fib(10)
+
 #__________________________________________
+
+# Fibonacci 
+# while loop
+
+def fib(n)
+	
+	if n <= 1
+		puts n
+	else	
+		first = 0
+		second = 1
+		counter = 0
+
+		while counter < n	
+			third = first + second
+			puts third
+			
+			first = second
+			second = third
+			
+			counter += 1
+		end	
+	end
+end
+
+# fib(10) 
+
 #__________________________________________
+
+# return the factorial of n
+
+def factorial(n)
+	if n == 0
+		return 1
+	else
+		return n * factorial(n-1)
+	end
+end
+
+# puts factorial(6)
+
 #__________________________________________
+
+# need to figure out why it's not working....
+
+def length(arr, l)
+	if arr.length > 1
+		return length(arr[1,arr.length], l+1)
+	else
+		return l
+	end
+end
+
+# puts length([],0)
+
+# puts length([1,2,3,4,5],0)
+
 #__________________________________________
+
+arr = ["a", "b", "c", "d", "e"]
+
+# p(arr)
+
+# p(arr[0,arr.length-1])
+
+# p(arr[0..arr.length-2])
+
+# p(arr[0..arr.length-3])
+
+# p(arr[0..-1])
+
 #__________________________________________
+
+def palindrome(l)
+
+	if l.length <= 1
+		return true
+	end
+
+	if l[0] == l[-1]
+		return palindrome(l[1..-2])
+	end
+
+	return false
+end
+
+# puts palindrome("aviva")
+
+# puts palindrome("kimberly")
+
 #__________________________________________
+
+
+def find(l,i)
+	if l
+		if i == l[0]
+			return l[0]
+		end
+
+		return find(l[1..-1],i) 
+	end
+	return "nil"
+end
+
+l = [1,2,3,4,5,6,7,8,9,10]
+
+# puts find(l,10)
+
+# puts find(l,11)
+
+
+#__________________________________________
+
+def fold_paper(width,height,folds)
+	
+	width = width.to_f
+	height = height.to_f
+
+	if folds == 0
+		return "#{width}, #{height}"
+	end
+	if width <= height
+		# puts width,height
+		return fold_paper(width, height/2, folds-1)
+	else
+		# puts width,height
+		return fold_paper(width/2, height, folds-1)
+	end
+end
+
+# puts fold_paper(11, 8, 2)
+
+# puts fold_paper(11, 8, 10)
+
+#__________________________________________
+
+# count the sum of the elements in the list
+
+l = [1,2,3,4,5,6,7,8,9,10]
+
+def sum_list(l)
+	if l
+		puts l[0]
+		return l[0] + sum_list(l[1..-1])
+	end
+	return 0
+end
+
+# puts sum_list([1,2,3,4,5,6,7,8,9,10])
+
 #__________________________________________
 #__________________________________________
 #__________________________________________
