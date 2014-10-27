@@ -146,6 +146,24 @@ end
 
 #__________________________________________
 
+# Indiegogo Interview
+
+# Write a function that takes a string and
+# an ampersand, &, given a number to duplicate
+# and combine them together as a result, but
+# remove the ending ampersand in the string.
+
+lt_ampersand = ["abcd","abcd","abcd","abcd","abcd","abcd"]
+
+def join_ampersand(word_list)
+	newstring = word_list.join("&")
+	return newstring
+end
+
+# puts join_ampersand(lt_ampersand)
+
+#__________________________________________
+
 # Write a function that takes a list of integers and returns the average (without using the avg method)
 def average(number_list)
     average = (sum_numbers(number_list)).to_f / number_list.length

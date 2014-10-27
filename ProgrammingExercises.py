@@ -1326,10 +1326,9 @@ def fizzbuzz(n):
 
 # fizzbuzz(15)
 
-# def fizzbuzz(n):
-#     # Write your code here.
-#     for i in range(1, n+1):
-#         print "Fizz"*(i%3 == 0) + "Buzz"*(i%5 == 0) or i
+def fizzbuzz(n):
+    for i in range(1, n+1):
+        print "Fizz"*(i%3 == 0) + "Buzz"*(i%5 == 0) or i
 
 # fizzbuzz(15)
 
